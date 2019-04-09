@@ -48,7 +48,8 @@ export default class RegisterAddress extends Component {
 
   getExistingIndex = async() => {
     const { contract } = this.state;
-    const response = await contract.methods.getIndexName().call();
+    
+    const response = await contract.methods.getRegisteredState().call(); //will just return a int state, looking for 1
     this.setState({currentIndexName: response});
   }
 
@@ -58,11 +59,11 @@ export default class RegisterAddress extends Component {
     console.log("using web3 version:" + web3.version);
 
     // Stores a given value, 5 by default.
-    await contract.methods.createIndex(this.state.indexNameText).send({ from: accounts[0] });
-    this.setState({indexNameText: "" });
+    await contract.methods.registerAddress().send({ from: accounts[0] });
+    this.setState({indexNameText: accounts[0] });
 
     // Get the value from the contract to prove it worked.
-    const response = await contract.methods.getIndexName().call();
+    const response = await contract.methods.getRegisteredState().call();
     // Update state with the result.
     this.setState({ currentIndexName: response });
     

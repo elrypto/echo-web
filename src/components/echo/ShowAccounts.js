@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import SolContract from '../common/SolContract';
 import EchoRegister from './../../contracts/EchoRegister';
 import getWeb3 from "../../utils/getWeb3";
 
@@ -52,16 +51,16 @@ export default class ShowAccounts extends Component {
         console.log("loadAccounts()");
         const {web3, accounts, contract} = this.state;
         console.log("using web3:" + web3.version)
-        const response = await contract.methods.getAllAddresses().call();
+        const response = await contract.methods.getAllRegistered().call();
         this.setState({loadedAccounts: response});
     }
 
     loadIndexesForAccounts = async() => {
       console.log("loadIndexesforAccounts()");
-      const {web3, accounts, contract, loadedAccounts} = this.state;
+      /*const {web3, accounts, contract, loadedAccounts} = this.state;
 
       if (loadedAccounts){
-        const response = await contract.methods.getAllAddresses().call();
+        const response = await contract.methods.getAllRegistered().call();
         let indexesForAddress = {}
 
         for (let i=0; i < response.length; i++){
@@ -73,7 +72,7 @@ export default class ShowAccounts extends Component {
         console.log(indexesForAddress);
       }else{
         console.error("call loadAccounts() first, this method uses that state");
-      }
+      }*/
     }
 
     

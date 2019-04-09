@@ -22,7 +22,7 @@ class Header extends Component {
                         <a class="p-2 text-dark" href="#/my_portfolio">My Portfolios</a>
                     </nav>
                     
-                    <a class="btn btn-outline-primary" href="#">Get Started</a>
+                    <a class="btn btn-outline-primary" href="#/register">Get Started</a>
                 </div>
                 
               

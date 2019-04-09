@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import EchoContract from "./../../contracts/Echo.json";
+
+/* This is not the right contract!*/
+import EchoContract from "./../../contracts/EchoRegister.json";
 import getWeb3 from "./../../utils/getWeb3";
 
 
