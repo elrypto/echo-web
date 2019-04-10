@@ -10,8 +10,7 @@ export default class RegisterAddress extends Component {
     currentIndexName: "", 
     web3: null, 
     accounts: null, 
-    contract: null, 
-    loomContract: null,
+    contract: null,
     indexNameText: "",
     tokenToAddSymbol: "",
     tokenToAddAmount: 0
@@ -41,7 +40,7 @@ export default class RegisterAddress extends Component {
       // example of interacting with the contract's methods.
       this.setState({ web3, accounts, contract: instance });
 
-      this.getExistingIndex();
+      //this.getExistingIndex();
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -67,8 +66,7 @@ export default class RegisterAddress extends Component {
   
     //ETH TX (just registering address, and sets state to 1)
     await contract.methods.registerAddress().send({ from: accounts[0] });
-    this.setState({indexNameText: accounts[0] });
-
+    //this.setState({indexNameText: accounts[0] });
 
     
     //LOOM TX (stores name of index, and the Eth address (which functions as the cross chain key))

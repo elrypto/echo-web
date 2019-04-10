@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import EchoRegister from './../../contracts/EchoRegister';
 import getWeb3 from "../../utils/getWeb3";
+import LoomContract from "./../loom/LoomContract";
 
 
 export default class ShowAccounts extends Component {
@@ -52,11 +53,32 @@ export default class ShowAccounts extends Component {
         const {web3, accounts, contract} = this.state;
         console.log("using web3:" + web3.version)
         const response = await contract.methods.getAllRegistered().call();
+        //console.log(response);
+
+
         this.setState({loadedAccounts: response});
     }
 
     loadIndexesForAccounts = async() => {
       console.log("loadIndexesforAccounts()");
+      
+      const loomContract = new LoomContract();
+      await loomContract.loadContract();
+      let loomInstance = loomContract.getContract();
+      
+      const {loadedAccounts} = this.state;
+      let dexsForAddr = {};
+
+
+      for (let r in loadedAccounts){
+        console.log("r:", r, loadedAccounts[r]);
+        let index = await loomInstance.methods.getIndexName(loadedAccounts[r]).call();
+        console.log("index:", index);
+        dexsForAddr[loadedAccounts[r]] = index;
+      }
+
+      this.setState({loadedAccounts:dexsForAddr});
+
       /*const {web3, accounts, contract, loadedAccounts} = this.state;
 
       if (loadedAccounts){
