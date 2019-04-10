@@ -8,7 +8,6 @@ import DragAndDropTest from './../components/test/DragAndDropTest';
 import DynamicJSONTest from '../components/test/DynamicJSONTest';
 import { buildJSON } from '../utils/EchoUtils';
 import ShowAccounts from './../components/echo/ShowAccounts';
-import CreateSideChainAccount from './../components/echo/CreateSideChainAccount';
 import LoomTest from '../components/test/LoomTest';
 
 

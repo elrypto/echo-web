@@ -1,10 +1,9 @@
 import {
     Client, LocalAddress, CryptoUtils, LoomProvider
-  } from 'loom-js'
+  } from 'loom-js';
   
-  import Web3 from 'web3'
-  import EchoTest from './../test/EchoTest.json'
-  
+  import Web3 from 'web3';
+  import EchoApp from './../../contracts/EchoApp.json';  
 
   export default class LoomContract {
     async loadContract() {
@@ -17,8 +16,8 @@ import {
     _createClient() {
       this.privateKey = CryptoUtils.generatePrivateKey();
       this.publicKey = CryptoUtils.publicKeyFromPrivateKey(this.privateKey);
-      let writeUrl = 'ws://127.0.0.1:46658/websocket';
-      let readUrl = 'ws://127.0.0.1:46658/queryws';
+      let writeUrl = 'ws://192.168.43.120:46658/websocket';
+      let readUrl = 'ws://192.168.43.120:46658/queryws';
       let networkId = 'default';
   
       if (process.env.NETWORK == 'extdev') {
@@ -44,7 +43,7 @@ import {
     }
 
     getContract() {
-      return this.echoTestInstance;
+      return this.echoAppInstance;
     }
   
     getCurrentUserAddress(){
@@ -53,14 +52,14 @@ import {
 
     async _createContractInstance() {
       const networkId = await this._getCurrentNetwork();
-      this.currentNetwork = EchoTest.networks[networkId];
+      this.currentNetwork = EchoApp.networks[networkId];
   
       if (!this.currentNetwork) {
         throw Error('Contract not deployed on DAppChain');
       }
   
       
-      this.echoTestInstance = new this.web3.eth.Contract(EchoTest.abi, this.currentNetwork.address, {
+      this.echoAppInstance = new this.web3.eth.Contract(EchoApp.abi, this.currentNetwork.address, {
         from: this.currentUserAddress
       })
   
